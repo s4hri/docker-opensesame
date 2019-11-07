@@ -9,11 +9,10 @@ xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 #  1 [Generic        ]: HDA-Intel - HD-Audio Generic
 #                      HD-Audio Generic at 0xf6800000 irq 97
 
-docker run --gpus all \
-           -ti --rm \
+docker run -ti --rm \
            -v $XSOCK:$XSOCK \
            -v $XAUTH:$XAUTH \
            --env "XAUTHORITY=${XAUTH}" \
            --env="DISPLAY=${DISPLAY}" \
            --device /dev/snd --env ALSA_CARD=Generic \
-           opensesame:v3.2.8-runtime-ubuntu18.04-nvidia-opengl
+           opensesame:v3.2.8-runtime-py27-ubuntu18.04

@@ -1,4 +1,4 @@
-FROM nvidia/opengl:1.0-glvnd-runtime-ubuntu18.04
+FROM ubuntu:bionic
 LABEL maintainer="Davide De Tommaso <dtmdvd@gmail.com>"
 
 COPY requirements/deb-pkgs/*.deb /root/
