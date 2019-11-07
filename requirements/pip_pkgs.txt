@@ -1,0 +1,55 @@
+arrow==0.7.0
+backports-abc==0.5
+backports.shutil-get-terminal-size==1.0.0
+backports.ssl-match-hostname==3.5.0.1
+cffi==1.11.2
+configobj==5.0.6
+et-xmlfile==1.0.1
+fastnumbers==2.0.2
+future==0.16.0
+humanize==0.5.1
+imageio==2.2.0
+ipython-genutils==0.2.0
+jdcal==1.3
+json-tricks==3.11.0
+jupyter-client==5.1.0
+jupyter-console==5.2.0
+jupyter-core==4.3.0
+mediadecoder==0.1.5
+moviepy==0.2.3.2
+oauthlib==1.1.2
+openpyxl==2.4.9
+opensesame-extension-osf==1.2.0 # Updated in 3.2.8
+opensesame_extension_osweb==1.3.3.0 # Updated in 3.2.8
+opensesame-plugin-media-player-mpy==0.1.6
+opensesame-plugin-psychopy==0.5.0
+opensesame-windows-launcher==0.4.2 # Updated in 3.2.2
+prettytable==0.7.2
+prompt-toolkit==1.0.15
+psychopy==1.85.3
+pycparser==2.18
+pygame==1.9.3
+pyglet==1.3.0
+python-bidi==0.4.0
+python-datamatrix==0.9.14 # Updated in 3.2.7
+python-fileinspector==1.0.2
+python-opensesame==3.2.8 # Updated in 3.2.8
+python-pseudorandom==0.2.2
+python-pygaze==0.6.0a25 # Updated in 3.2.2
+python-qdatamatrix==0.1.18
+python-qnotifications==2.0.3 # Updated in 3.2.6
+python-qosf==1.3.0 # Updated in 3.2.8
+python-qprogedit==4.1.0 # Updated in 3.2.7
+python-qtpip==0.2.0 # Updated in 3.2.6
+js2py==0.60 # New in 3.2.7
+requests-oauthlib==0.6.2
+sounddevice==0.3.9
+tqdm==4.19.5
+webcolors==1.5
+win-unicode-console==0.5
+yolk3k==0.9
+qtconsole==4.3.1
+expyriment==0.10.0
+scipy==0.19.1
+pyserial==3.4
+PyAudio==0.2.11
