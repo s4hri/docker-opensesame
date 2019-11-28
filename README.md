@@ -28,6 +28,8 @@ id -nG
 # 2. Running Opensesame using Docker
 ```
 git clone https://github.com/s4hri/opensesame-docker
+cd opensesame-docker
+git checkout build
 cd scripts
 ./build
 ./run
