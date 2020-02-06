@@ -108,4 +108,4 @@ RUN sed -i 's/unicode/str/g' /home/${USER}/.local/share/opensesame_plugins/media
 
 USER ${USER}
 WORKDIR /home/${USER}/exp
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["opensesame"]
