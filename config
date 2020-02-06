@@ -1,0 +1,10 @@
+# Please select 'yes' if you have an NVidia video 'no' otherwise
+NVIDIA_CARD='yes'
+
+# Please select the name of the audio card, check with 'aplay -l' and 'aplay -L'
+ALSA_CARD='Generic'
+
+# Do not modify the following vars
+OPENSESAME_VER="3.2.8"
+DOCKER_IMAGE_NAME="iitschri/opensesame:${OPENSESAME_VER}"
+DOCKER_CONTAINER_NAME="opensesame-container"
