@@ -1,5 +1,5 @@
 # Please select 'yes' if you have an NVidia video 'no' otherwise
-NVIDIA_CARD='yes'
+NVIDIA_CARD='no'
 
 # Please select the name of the audio card, check with 'aplay -l' and 'aplay -L'
 ALSA_CARD='Generic'
