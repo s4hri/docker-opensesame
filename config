@@ -8,7 +8,3 @@ SRC_IMAGE_NVIDIA="nvidia/opengl:1.0-glvnd-runtime-ubuntu18.04"
 SRC_IMAGE_GITHUB="https://github.com/s4hri/opensesame-docker"
 DOCKER_IMAGE_NAME="iitschri/opensesame:3.2.8-runtime-ubuntu18.04"
 DOCKER_CONTAINER_NAME="opensesame_3.2.8-container"
-BUILD_ARGS="--build-arg LOCAL_USER_ID=$(id -u $USER) \
-            --build-arg USER=$USER"
-DOCKER_RUN_ARGS="--volume ${PWD}/exp:/home/${USER}/exp \
-                 --volume $XAUTHORITY:/home/${USER}/.Xauthority"

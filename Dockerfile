@@ -3,15 +3,8 @@ ARG SRC_IMAGE
 FROM ${SRC_IMAGE}
 LABEL maintainer="Davide De Tommaso <dtmdvd@gmail.com>"
 
-ARG USER
-ARG LOCAL_USER_ID
-
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG C.UTF-8
-
-RUN useradd -ms /bin/bash -u $LOCAL_USER_ID ${USER}
-RUN usermod -g root -G audio ${USER}
-RUN echo "${USER}:${USER}" | chpasswd
 
 RUN LC_ALL=en_US.UTF-8
 
@@ -79,9 +72,8 @@ RUN apt-get install -y \
     x11-xserver-utils xinit xserver-xorg-video-dummy xserver-xorg-input-void websockify ffmpeg \
     zip unzip;
 
-ENV PATH=${PATH}:/home/${USER}/.local/bin
+ENV PATH=${PATH}:/root/.local/bin
 
-USER ${USER}
 # python-qnotifications requires qtpy in advance, that's why pip3 two times
 # pyyaml needs to be older than 5.1 - otherwise you will get ConstructorError on startup
 #  (yes, 3.13 is actually just before 5.1)
@@ -96,7 +88,7 @@ RUN python3 -m pip install --user psychopy==3.0.6
 # psychopy must use the system pyqt5 libs, otherwise will segfault:
 RUN python3 -m pip uninstall -y PyQt5
 
-RUN cd /home/${USER} && \
+RUN cd /root && \
   wget https://github.com/s4hri/OpenSesame/archive/release/3.2.8-Py3.6.tar.gz && \
   tar xvf 3.2.8-Py3.6.tar.gz && \
   cd OpenSesame-release-3.2.8-Py3.6 && \
@@ -104,8 +96,7 @@ RUN cd /home/${USER} && \
 
 RUN python3 -m pip install --user mediadecoder
 RUN python3 -m pip install --user opensesame-plugin-media_player_mpy
-RUN sed -i 's/unicode/str/g' /home/${USER}/.local/share/opensesame_plugins/media_player_mpy/media_player_mpy.py
+RUN sed -i 's/unicode/str/g' /root/.local/share/opensesame_plugins/media_player_mpy/media_player_mpy.py
 
-USER ${USER}
-WORKDIR /home/${USER}/exp
+WORKDIR /root/exp
 ENTRYPOINT ["opensesame"]
