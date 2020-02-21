@@ -1,10 +1,10 @@
-# Please select 'yes' if you have an NVidia video 'no' otherwise
-NVIDIA_CARD='no'
-
 # Please select the name of the audio card, check with 'aplay -l' and 'aplay -L'
-ALSA_CARD='Generic'
+ALSA_CARD="Generic"
 
-# Do not modify the following vars
-OPENSESAME_VER="3.2.8"
-DOCKER_IMAGE_NAME="iitschri/opensesame:${OPENSESAME_VER}"
-DOCKER_CONTAINER_NAME="opensesame-container"
+
+## Do not modify the following params
+SRC_IMAGE="ubuntu:20.04"
+SRC_IMAGE_NVIDIA="iitschri/ubuntu:20.04-nvidia"
+SRC_IMAGE_GITHUB="https://github.com/s4hri/opensesame-docker"
+DOCKER_IMAGE_NAME="iitschri/opensesame:3.2.8-ubuntu20.04"
+DOCKER_CONTAINER_NAME="opensesame_3.2.8-ubuntu20.04-container"

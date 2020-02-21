@@ -3,15 +3,15 @@ ARG SRC_IMAGE
 FROM ${SRC_IMAGE}
 LABEL maintainer="Davide De Tommaso <dtmdvd@gmail.com>"
 
-ARG USER
-ARG LOCAL_USER_ID
-
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG C.UTF-8
 
-RUN useradd -ms /bin/bash -u $LOCAL_USER_ID ${USER}
-RUN usermod -g root -G audio ${USER}
-RUN echo "${USER}:${USER}" | chpasswd
+RUN useradd -ms /bin/bash docky
+RUN usermod -g root -G audio docky
+RUN echo 'docky:docky' | chpasswd
+RUN echo 'root:root' | chpasswd
+WORKDIR /home/docky
+ENV PATH=${PATH}:/home/docky/.local/bin
 
 RUN LC_ALL=en_US.UTF-8
 
@@ -38,17 +38,20 @@ RUN apt-get install -y \
     qt5-default \
     wget;
 
-RUN apt-get update
+#RUN apt-get remove -y python3.8
+RUN apt-get install -y python3-pip libsdl1.2-dev
+#RUN pip3 install qtconsole
+#RUN apt-get update
 
 RUN apt-get install -y \
     ca-certificates cron dbus dirmngr distro-info-data file gir1.2-glib-2.0 \
     gnupg gnupg-l10n gnupg-utils gpg gpg-agent gpg-wks-client gpg-wks-server \
-    gpgconf gpgsm iso-codes libapparmor1 libapt-inst2.0 libasn1-8-heimdal \
+    gpgconf gpgsm iso-codes libapparmor1 libasn1-8-heimdal \
     libassuan0 libdbus-1-3 libexpat1 libgirepository-1.0-1 libglib2.0-0 \
     libglib2.0-data libgssapi3-heimdal libhcrypto4-heimdal libheimbase1-heimdal \
-    libheimntlm0-heimdal libhx509-5-heimdal libicu60 libkrb5-26-heimdal libksba8 \
+    libheimntlm0-heimdal libhx509-5-heimdal libkrb5-26-heimdal libksba8 \
     libldap-2.4-2 libldap-common libmagic-mgc libmagic1 libmpdec2 libnpth0 \
-    libpython3-stdlib libpython3.6-minimal libpython3.6-stdlib libreadline7 \
+    libpython3-stdlib \
     libroken18-heimdal libsasl2-2 libsasl2-modules libsasl2-modules-db \
     libsqlite3-0 libssl1.1 libwind0-heimdal libxml2 lsb-release mime-support \
     openssl pinentry-curses powermgmt-base \
@@ -58,7 +61,6 @@ RUN apt-get install -y \
     python-apt-common \
     python3 \
     python3.6 \
-    python3.6-minimal \
     python3-dbus \
     python3-gi \
     python3-minimal \
@@ -75,28 +77,28 @@ RUN apt-get install -y \
     python3-pyaudio \
     python3-qtconsole \
     ipython3 \
-    ipython3-qtconsole \
     x11-xserver-utils xinit xserver-xorg-video-dummy xserver-xorg-input-void websockify ffmpeg \
     zip unzip;
+RUN apt-get install -y python3-pygame
 
-ENV PATH=${PATH}:/home/${USER}/.local/bin
-
-USER ${USER}
+USER docky
 # python-qnotifications requires qtpy in advance, that's why pip3 two times
 # pyyaml needs to be older than 5.1 - otherwise you will get ConstructorError on startup
 #  (yes, 3.13 is actually just before 5.1)
 RUN pip3 install --upgrade --user setuptools pip
 RUN python3 -m pip install --user QtPy QScintilla python-qprogedit python-datamatrix pyyaml==3.13
+
+
 RUN python3 -m pip install --user python-qdatamatrix python-pseudorandom python-qnotifications expyriment \
                                   numpy pillow pyflakes pyopengl pyserial markdown ipython python-fileinspector \
-                                  shapely matplotlib scipy cryptography==2.8 pyglet==1.3.2 python-qprogedit python-datamatrix \
-                                  pycairo pyparallel python-pygaze pyqtwebengine pygame
+                                  shapely matplotlib scipy cryptography==2.8 python-qprogedit python-datamatrix \
+                                  pycairo pyparallel python-pygaze
 
-RUN python3 -m pip install --user psychopy==3.0.6
+RUN python3 -m pip install --user psychopy==3.2.4
 # psychopy must use the system pyqt5 libs, otherwise will segfault:
-RUN python3 -m pip uninstall -y PyQt5
+#RUN python3 -m pip uninstall -y PyQt5
 
-RUN cd /home/${USER} && \
+RUN cd /home/docky && \
   wget https://github.com/s4hri/OpenSesame/archive/release/3.2.8-Py3.6.tar.gz && \
   tar xvf 3.2.8-Py3.6.tar.gz && \
   cd OpenSesame-release-3.2.8-Py3.6 && \
@@ -104,8 +106,6 @@ RUN cd /home/${USER} && \
 
 RUN python3 -m pip install --user mediadecoder
 RUN python3 -m pip install --user opensesame-plugin-media_player_mpy
-RUN sed -i 's/unicode/str/g' /home/${USER}/.local/share/opensesame_plugins/media_player_mpy/media_player_mpy.py
+RUN sed -i 's/unicode/str/g' /home/docky/.local/share/opensesame_plugins/media_player_mpy/media_player_mpy.py
 
-USER ${USER}
-WORKDIR /home/${USER}/exp
 ENTRYPOINT ["opensesame"]
