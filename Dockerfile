@@ -3,10 +3,11 @@ ARG SRC_IMAGE
 FROM ${SRC_IMAGE}
 LABEL maintainer="Davide De Tommaso <dtmdvd@gmail.com>"
 
+ARG LOCAL_USER_ID
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG C.UTF-8
 
-RUN useradd -ms /bin/bash docky
+RUN useradd -ms /bin/bash -u ${LOCAL_USER_ID} docky
 RUN usermod -g root -G audio docky
 RUN echo 'docky:docky' | chpasswd
 RUN echo 'root:root' | chpasswd
@@ -86,9 +87,11 @@ RUN python3 -m pip install --user QtPy QScintilla pyyaml==3.13
 RUN python3 -m pip install --user expyriment \
                                   numpy pillow pyflakes pyopengl pyserial markdown ipython  \
                                   shapely matplotlib scipy cryptography==2.8  \
-                                  pycairo pyparallel
+                                  pycairo pyparallel pyqtwebengine;
 
 RUN python3 -m pip install --user psychopy==3.2.4
+
+#RUN python3 -m pip uninstall -y PyQt5
 
 RUN cd /home/docky && \
   wget https://github.com/s4hri/OpenSesame/archive/release/3.2.8-Py3.6.tar.gz && \
