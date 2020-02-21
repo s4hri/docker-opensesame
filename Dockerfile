@@ -6,6 +6,7 @@ LABEL maintainer="Davide De Tommaso <dtmdvd@gmail.com>"
 ENV DEBIAN_FRONTEND noninteractive
 ENV LANG C.UTF-8
 
+<<<<<<< HEAD:Dockerfile
 RUN useradd -ms /bin/bash docky
 RUN usermod -g root -G audio docky
 RUN echo 'docky:docky' | chpasswd
@@ -13,6 +14,8 @@ RUN echo 'root:root' | chpasswd
 WORKDIR /home/docky
 ENV PATH=${PATH}:/home/docky/.local/bin
 
+=======
+>>>>>>> af472be635ca56c3bc5d2b2a01469f650881710e:Dockerfile
 RUN LC_ALL=en_US.UTF-8
 
 RUN apt-get update
@@ -81,7 +84,12 @@ RUN apt-get install -y \
     zip unzip;
 RUN apt-get install -y python3-pygame
 
+<<<<<<< HEAD:Dockerfile
 USER docky
+=======
+ENV PATH=${PATH}:/root/.local/bin
+
+>>>>>>> af472be635ca56c3bc5d2b2a01469f650881710e:Dockerfile
 # python-qnotifications requires qtpy in advance, that's why pip3 two times
 # pyyaml needs to be older than 5.1 - otherwise you will get ConstructorError on startup
 #  (yes, 3.13 is actually just before 5.1)
@@ -98,7 +106,11 @@ RUN python3 -m pip install --user psychopy==3.2.4
 # psychopy must use the system pyqt5 libs, otherwise will segfault:
 #RUN python3 -m pip uninstall -y PyQt5
 
+<<<<<<< HEAD:Dockerfile
 RUN cd /home/docky && \
+=======
+RUN cd /root && \
+>>>>>>> af472be635ca56c3bc5d2b2a01469f650881710e:Dockerfile
   wget https://github.com/s4hri/OpenSesame/archive/release/3.2.8-Py3.6.tar.gz && \
   tar xvf 3.2.8-Py3.6.tar.gz && \
   cd OpenSesame-release-3.2.8-Py3.6 && \
@@ -106,6 +118,12 @@ RUN cd /home/docky && \
 
 RUN python3 -m pip install --user mediadecoder
 RUN python3 -m pip install --user opensesame-plugin-media_player_mpy
+<<<<<<< HEAD:Dockerfile
 RUN sed -i 's/unicode/str/g' /home/docky/.local/share/opensesame_plugins/media_player_mpy/media_player_mpy.py
 
+=======
+RUN sed -i 's/unicode/str/g' /root/.local/share/opensesame_plugins/media_player_mpy/media_player_mpy.py
+
+WORKDIR /root/exp
+>>>>>>> af472be635ca56c3bc5d2b2a01469f650881710e:Dockerfile
 ENTRYPOINT ["opensesame"]

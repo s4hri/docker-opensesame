@@ -3,8 +3,16 @@ ALSA_CARD="Generic"
 
 
 ## Do not modify the following params
+<<<<<<< HEAD
 SRC_IMAGE="ubuntu:20.04"
 SRC_IMAGE_NVIDIA="iitschri/ubuntu:20.04-nvidia"
 SRC_IMAGE_GITHUB="https://github.com/s4hri/opensesame-docker"
 DOCKER_IMAGE_NAME="iitschri/opensesame:3.2.8-ubuntu20.04"
 DOCKER_CONTAINER_NAME="opensesame_3.2.8-ubuntu20.04-container"
+=======
+SRC_IMAGE="ubuntu:18.04"
+SRC_IMAGE_NVIDIA="nvidia/opengl:1.0-glvnd-runtime-ubuntu18.04"
+SRC_IMAGE_GITHUB="https://github.com/s4hri/opensesame-docker"
+DOCKER_IMAGE_NAME="iitschri/opensesame:3.2.8-runtime-ubuntu18.04"
+DOCKER_CONTAINER_NAME="opensesame_3.2.8-container"
+>>>>>>> af472be635ca56c3bc5d2b2a01469f650881710e
