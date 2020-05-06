@@ -89,7 +89,7 @@ RUN python3 -m pip install --user expyriment \
                                   shapely matplotlib scipy cryptography==2.8  \
                                   pycairo pyparallel pyqtwebengine;
 
-RUN python3 -m pip install --user psychopy==3.2.4
+RUN python3 -m pip install --user psychopy==2020.1.1
 
 #RUN python3 -m pip uninstall -y PyQt5
 
